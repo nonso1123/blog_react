@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { FaHamburger } from "react-icons/fa";
 import ResponsiveNavBar from "./ResponsiveNavBar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const NavBar = ({
 	darkMode,
@@ -13,12 +13,13 @@ const NavBar = ({
 	setUsername,
 }) => {
 	const [showNavBar, setShowNavBar] = useState(false);
+	const navigate = useNavigate();
 	const logout = () => {
 		localStorage.removeItem("access");
 		localStorage.removeItem("refresh");
 		setIsAuthenticated(false);
 		setUsername(null);
-		window.location.reload();
+		navigate("/");
 	};
 	return (
 		<>
@@ -32,7 +33,7 @@ const NavBar = ({
 				<ul className="flex items-center justify-end gap-9 text-[#383C4A] lg:flex-1 max-md:hidden dark:text-white">
 					{isAuthenticated ? (
 						<>
-							<li className="cursor-pointer">
+							<li className="font-semibold">
 								<NavLink
 									to={`/profile/${username}`}
 									className={({ isActive }) => (isActive ? "active" : "")}
@@ -40,7 +41,7 @@ const NavBar = ({
 									Hi, {username}
 								</NavLink>
 							</li>
-							<li onClick={logout} className="cursor-pointer">
+							<li onClick={logout} className="cursor-pointer font-semibold">
 								Logout
 							</li>
 						</>
@@ -54,7 +55,7 @@ const NavBar = ({
 									Login
 								</NavLink>
 							</li>
-							<li className="cursor-pointer">
+							<li className="font-semibold">
 								<NavLink
 									to="/signup"
 									className={({ isActive }) => (isActive ? "active" : "")}
