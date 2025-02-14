@@ -18,10 +18,16 @@ import NotFoundPage from "./pages/NotFoundPage";
 const App = () => {
 	const [username, setUsername] = useState(null);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+	// ✅ Only fetch username if token exists
+	const token = localStorage.getItem("access");
+
 	const { data } = useQuery({
 		queryKey: ["username"],
-		queryFn: getUsername,
+		queryFn: token ? getUsername : () => null,
+		enabled: !!token, // ✅ Prevents request if there's no token
 	});
+
 	useEffect(() => {
 		if (data) {
 			setUsername(data.username);
