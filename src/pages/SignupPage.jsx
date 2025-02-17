@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import InputError from "@/ui_components/InputError";
 
 const SignupPage = ({ userInfo, updateForm, toggleModal }) => {
+	const navigate = useNavigate();
 	const { register, handleSubmit, formState, reset, watch } = useForm({
 		defaultValues: userInfo ? userInfo : {},
 	});
@@ -38,6 +39,7 @@ const SignupPage = ({ userInfo, updateForm, toggleModal }) => {
 		onSuccess: () => {
 			toast.success("Profile updated successfully!!!");
 			toggleModal();
+
 			queryClient.invalidateQueries(["users", username]);
 		},
 		onError: (err) => {
@@ -48,6 +50,7 @@ const SignupPage = ({ userInfo, updateForm, toggleModal }) => {
 		mutationFn: (data) => registerUser(data),
 		onSuccess: () => {
 			toast.success("You have successfully created an account!!!");
+			navigate("/signin");
 			reset();
 		},
 		onError: (err) => {
