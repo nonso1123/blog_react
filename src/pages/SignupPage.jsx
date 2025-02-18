@@ -27,7 +27,7 @@ const SignupPage = ({ userInfo, updateForm, toggleModal }) => {
 			formData.append("job_title", data.job_title);
 			formData.append("bio", data.bio);
 			if (data.profile_picture && data.profile_picture[0] != "/") {
-				formData.append("data.profile_picture", data.profile_picture[0]);
+				formData.append("profile_picture", data.profile_picture[0]);
 			}
 			updateProfileMutation.mutate(formData);
 		} else {
