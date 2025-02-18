@@ -30,7 +30,7 @@ const ProfilePage = ({ authUsername }) => {
 				authUsername={authUsername}
 				toggleModal={toggleModal}
 			/>
-			<BlogContainer blogs={blogs} title={`🍔 ${username}'s Posts`} />
+			<BlogContainer blogs={blogs} title={` ${username}'s Posts`} />
 			{showModal && (
 				<Modal toggleModal={toggleModal}>
 					<SignupPage

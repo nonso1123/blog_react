@@ -2,7 +2,7 @@ import React from "react";
 import BlogCard from "./BlogCard";
 import Spinner from "./Spinner";
 
-const BlogContainer = ({ isPending, blogs, title = "Latest Posts" }) => {
+const BlogContainer = ({ isPending, blogs, title = "New Blog Posts" }) => {
 	if (isPending) {
 		return <Spinner />;
 	}
